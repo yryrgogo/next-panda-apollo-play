@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client';
 
-export const SPOT_TILE_DATA = gql`
-  fragment SpotTile on Spot {
+export const SPOT_DATA = gql`
+  fragment Spot on Spot {
     __typename
     id
     name
@@ -13,18 +13,18 @@ export const GET_SPOTS = gql`
   query GetSpotList {
     spots {
       spots {
-        ...SpotTile
+        ...Spot
       }
     }
   }
-  ${SPOT_TILE_DATA}
+  ${SPOT_DATA}
 `;
 
 export const GET_SPOT = gql`
   query GetSpot($spotId: ID!) {
     spot(id: $spotId) {
-      ...SpotTile
+      ...Spot
     }
   }
-  ${SPOT_TILE_DATA}
+  ${SPOT_DATA}
 `;

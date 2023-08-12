@@ -1,41 +1,28 @@
-'use client';
-
-import { useQuery } from '@apollo/client/react';
-import { Fragment, useState } from 'react';
+import { Fragment } from 'react';
+import { SleepBlock } from '~/client/components/SleepBlock';
+import { ClientQueryBlockForGetSpots } from '~/client/components/ClientQueryBlockForGetSpots';
+import { ServerQueryBlockForGetUsers } from '~/client/components/ServerQueryBlockForGetSpot';
 import { SpotTile } from '~/client/components/SpotTile';
-import { GET_SPOTS } from '~/client/services/spotService';
+import { GET_SPOTS } from '~/client/services/graphql/queries/spotQuery';
+import { getClient } from '~/services/apolloForRSC';
 
-const Spots = () => {
-  const { data, loading, error, fetchMore } = useQuery<any, any>(GET_SPOTS);
-  const [isLoadingMore, setIsLoadingMore] = useState(false);
+const Spots = async () => {
+  // const { data, loading, error } = await getClient().query({ query: GET_SPOTS });
 
-  if (loading) return <p>loading</p>;
+  // if (loading) return <p>loading</p>;
 
-  if (error || !data) return <p>ERROR</p>;
+  // if (error || !data) return <p>ERROR</p>;
 
   return (
     <Fragment>
-      <p>header</p>
-      {data.spots &&
+      <h1>Spots</h1>
+      <SleepBlock />
+      <ClientQueryBlockForGetSpots>
+        <ServerQueryBlockForGetUsers />
+      </ClientQueryBlockForGetSpots>
+      {/* {data.spots &&
         data.spots.spots &&
-        data.spots.spots.map((spot: any) => <SpotTile key={spot.id} spot={spot} />)}
-      {data.spots &&
-        data.spots.hasMore &&
-        (isLoadingMore ? (
-          <p>loading</p>
-        ) : (
-          <button
-            onClick={async () => {
-              setIsLoadingMore(true);
-              await fetchMore({
-                variables: {},
-              });
-              setIsLoadingMore(false);
-            }}
-          >
-            Load More
-          </button>
-        ))}
+        data.spots.spots.map((spot: any) => <SpotTile key={spot.id} spot={spot} />)} */}
     </Fragment>
   );
 };

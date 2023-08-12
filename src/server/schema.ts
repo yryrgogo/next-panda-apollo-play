@@ -4,7 +4,7 @@ const typeDefs = gql`
   type Query {
     spots: SpotConnection!
     spot(id: ID!): Spot
-    me: User
+    user(id: ID!): User
   }
 
   type Mutation {
@@ -24,7 +24,7 @@ const typeDefs = gql`
   type User {
     id: ID!
     email: String!
-    spots: [Spot]!
+    spots: [Spot]
   }
 `;
 

@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/client';
 
 import { SpotTile } from '~/client/components/SpotTile';
-import { GET_SPOT } from '~/client/services/spotService';
+import { GET_SPOT } from '~/client/services/graphql/queries/spotQuery';
 
 const Spot = (props: { spotId: string }) => {
   const { data, loading, error } = useQuery(GET_SPOT, { variables: { spotId: props.spotId } });

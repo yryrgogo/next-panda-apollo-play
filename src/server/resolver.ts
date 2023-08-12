@@ -30,7 +30,7 @@ const spots: Spot[] = [
 
 const resolvers = {
   Query: {
-    spots: async (_: any, { dataSources }: any) => {
+    spots: (_: any, { dataSources }: any) => {
       return {
         spots,
       };
@@ -42,7 +42,17 @@ const resolvers = {
         description: 'Spot 2 description',
       };
     },
-    me: async (_: any, __: any, { dataSources }: any) => dataSources.userAPI.findOrCreateUser(),
+    user: (arg1: any, arg2: any, { dataSources }: any) => {
+      console.log(`arg1: ${JSON.stringify(arg1)}, arg2: ${JSON.stringify(arg2)}`);
+      const date = new Date();
+      const time = date.getTime();
+
+      return {
+        id: '1',
+        email: `${Math.random()}@fuga.com`,
+        spots: [],
+      };
+    },
   },
   Mutation: {
     login: async (_: any, { email }: any, { dataSources }: any) => {
@@ -53,17 +63,17 @@ const resolvers = {
       }
     },
   },
-  User: {
-    spots: async (_: any, __: any, { dataSources }: any) => {
-      return [
-        {
-          id: '9999',
-          name: 'Spot 9999',
-          description: 'Spot 9999 description',
-        },
-      ];
-    },
-  },
+  // User: {
+  //   spots: async (_: any, __: any, { dataSources }: any) => {
+  //     return [
+  //       {
+  //         id: '9999',
+  //         name: 'Spot 9999',
+  //         description: 'Spot 9999 description',
+  //       },
+  //     ];
+  //   },
+  // },
 };
 
 export { resolvers };
