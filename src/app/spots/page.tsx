@@ -7,11 +7,11 @@ import { GET_SPOTS } from '~/client/services/graphql/queries/spotQuery';
 import { getClient } from '~/services/apolloForRSC';
 
 const Spots = async () => {
-  // const { data, loading, error } = await getClient().query({ query: GET_SPOTS });
+  const { data, loading, error } = await getClient().query({ query: GET_SPOTS });
 
-  // if (loading) return <p>loading</p>;
+  if (loading) return <p>loading</p>;
 
-  // if (error || !data) return <p>ERROR</p>;
+  if (error || !data) return <p>ERROR</p>;
 
   return (
     <Fragment>
@@ -20,9 +20,9 @@ const Spots = async () => {
       <ClientQueryBlockForGetSpots>
         <ServerQueryBlockForGetUsers />
       </ClientQueryBlockForGetSpots>
-      {/* {data.spots &&
+      {data.spots &&
         data.spots.spots &&
-        data.spots.spots.map((spot: any) => <SpotTile key={spot.id} spot={spot} />)} */}
+        data.spots.spots.map((spot: any) => <SpotTile key={spot.id} spot={spot} />)}
     </Fragment>
   );
 };
